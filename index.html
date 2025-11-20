@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./dist/output.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
+    <script src="./index.js" defer></script>
 
     <title>Document</title>
 </head>
@@ -21,7 +22,8 @@
 
                  <hr class="border-[1] border-gray-500 my-4">
 
-                <div class="pnx flex flex-col gap-2 scr h-[360px] p-2 overflow-auto">
+                <div id="list_wrks" class="flex flex-col gap-2 scr h-[360px] p-2 overflow-auto" >
+
                     <div class="rounded-2xl p-1  pr-5 flex items-center justify-between  bg-[#48474750] hover:shadow-[0px_0px_10px_#73737350] hover:scale-105 transition duration-300 cursor-pointer" title="{roleX}">
                          <img src="./images/def.png" class="h-10 " alt="">
                          <p class="text-white font-thin tracking-[1px] ml-[-60px] ">Hisoka Bilal</p>
@@ -67,7 +69,7 @@
 
                  <div class=" m-2">
                  <hr class="border-[1] border-gray-500 mb-4 mt-2">
-                      <button class="text-gray-400 font-[200] self-start  border border-gray-400 py-1  rounded-full px-3 hover:text-green-400 hover:border-green-400">Add New Worker</button>
+                      <button id="btnAddWrk" class="text-gray-400 font-[200] self-start  border border-gray-400 py-1  rounded-full px-3 hover:text-green-400 hover:border-green-400">Add New Worker</button>
                  </div>
             </aside>
 
@@ -77,30 +79,30 @@
 
         <!-- -------------- reception --------------------- -->
 
-                  <div title="reception" class="reception  flex flex-col justify-around z-50 bg-black  opacity-50">
+                  <div title="reception" class="reception  flex flex-col justify-around z-20  ">
                        <div class=" text-black flex justify-center ">
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
                        </div>
 
                        <div class="flex justify-around">
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
                        </div>
 
                    </div>
 
         <!-- -------------- conference --------------------- -->
 
-                   <div title="conference" class="item2 flex flex-col justify-around  opacity-30 z-50 bg-red-500">
+                   <div title="conference" class="item2 flex flex-col justify-around z-20 ">
                            
                          <div class=" text-black flex justify-around">
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
                        </div>
 
                        <div class="flex justify-around">
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
                        </div> 
 
                        
@@ -109,59 +111,59 @@
 
         <!-- -------------- personnel --------------------- -->
 
-                   <div title="personnel" class="item3 flex flex-col justify-around  opacity-30 z-50 bg-yellow-600">
+                   <div title="personnel" class="item3 flex flex-col justify-around   z-20  ">
                      
                        <div class=" text-black flex justify-around">
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
                        </div>
 
                        <div class="flex justify-around">
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
                        </div>  
 
                    </div>
 
         <!-- -------------- serveurs --------------------- -->
                    
-                   <div title="serveurs" class="item4 flex flex-col justify-around opacity-30 z-50 bg-violet-500">
+                   <div title="serveurs" class="item4 flex flex-col justify-around  z-20  ">
                         
                        <div class=" text-black flex justify-around">
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
                        </div>
 
                        <div class="flex justify-around">
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
                        </div>  
                        
                    </div>
                    
         <!-- -------------- secusite --------------------- -->
 
-                   <div title="secusite" class="item5 flex flex-col justify-around opacity-30 z-50 bg-teal-500">
+                   <div title="secusite" class="item5 flex flex-col justify-around  z-20 ">
 
                         <div class=" text-black flex justify-around">
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
                        </div>
 
                        <div class="flex justify-around">
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
                        </div> 
                    </div>
 
         <!-- -------------- archives --------------------- -->
 
-                   <div title="archives" class="item6 flex flex-col justify-around  opacity-30 z-50 bg-orange-600">
+                   <div title="archives" class="item6 flex flex-col justify-around  z-20  ">
                          <div class="flex justify-around">
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
-                          <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
+                          <div class="bg-white h-[30px] border-[2px] hover:scale-105 cursor-pointer border-black w-[30px] flex justify-center items-center "><p>+</p></div>
                        </div> 
                    </div>
                    <!-- bg-img -->
@@ -174,7 +176,7 @@
     </main>
 
 
-<div id="addEmployeeModal" class="blok_form  text-white flex flex-col justify-center bg-slate-300 items-center p-8">
+<div id="addEmployeeModal" class="blok_form absolute top-0 hidden  text-white  flex-col justify-center bg-[#807f7f8a] items-center px-12 py-4 z-50">
    
    <div class="bg-[#000000d5] form_content border-2 px-10 pt-2 pb-2 w-[80%] rounded-[80px] flex flex-col gap-6">
        <div class="text-end px-4 ">
@@ -195,7 +197,7 @@
          
           <div>
             <label class="block pt-4" for="photo">Photo URL </label>
-            <input class="bg-[#38363610] hover:border-white focus:border-white border-gray-500 border-b outline-none rounded w-[80%] h-10 pl-4 ml-10" type="text" id="photo" placeholder="images.photo.jpg">
+            <input class="bg-[#38363610] hover:border-white focus:border-white border-gray-500 border-b outline-none rounded w-[80%] h-10 pl-4 ml-10" type="text"  id="photo" placeholder="images.photo.jpg">
           </div>
     
           <div>
@@ -229,28 +231,6 @@
          <div id="experienceContainer" class="border p-3 flex flex-col gap-4 mt-6">
              <label class="text-center font-sans font-[500]">Work Experiences </label>
               <hr class="border-[1] border-white mb-4">
-            
-          <div id="new_exprs" class="border border-[#7e7b7ba2] rounded-xl py-4">
-                 <div class="exprX flex flex-col gap-3">
-                    <input type="text" class="exp-title bg-[#38363610] hover:border-white focus:border-white border-gray-500 border outline-none rounded w-[80%] h-10 pl-4 ml-10"  placeholder="Job Title" >
-                    <div class="experience-item">
-                       <div class="justify-self-center my-3 flex flex-col items-center gap-4">
-                         <div>
-                              <label for="exp-start">start :</label> 
-                              <input id="exp-start" type="date" class="exp-start text-black rounded px-2" >
-                         </div>
-                          <div>
-                              <label for="exp-end">end : </label>
-                              <input type="date" class="exp-end text-black rounded px-2" >
-                          </div>
-                       </div>
-                    </div>
-
-                    <textarea id="description"  placeholder="description" class="description bg-[#38363610] hover:border-white focus:border-white border-gray-500 border outline-none rounded w-[80%] min-h-[60px] max-h-[60px] pl-4 ml-10 "></textarea>
-
-               </div>
-            
-           </div>
            
             <div class="flex justify-center">
                 <button type="button" class="hover:text-green-500" id="addExperienceBtn">+ Add Experience</button>
@@ -258,7 +238,7 @@
           </div>
 
           <div class="flex justify-center p-4" >
-               <button type="submit" class="submit-btn border py-1 px-12 rounded-2xl text-gray-400 border-gray-400 hover:text-white hover:border-white">Save Data</button>
+               <button id="AddWrk" type="submit" class="submit-btn border py-1 px-12 rounded-2xl text-gray-400 border-gray-400 hover:text-white hover:border-white">Save Data</button>
           </div>
           
         </form>
@@ -267,17 +247,7 @@
   </div>
 </div>
 
-<div class="bg-red-50 h-[400px]">
-        <div class="hover:scale-105 cursor-pointer w-[30px] overflow-hidden hover:w-[200px] transition duration-300 z-50 ">
-            <img src="./images/pin.png" class="h-[24px] relative top-4 left-[-2px]" alt="">
-             <div class="p-1  pr-3 flex items-center justify-between  hover:bg-[#484747b1]  hover:shadow-[0px_0px_10px_#73737350]  w-[150px] rounded hover:rounded-2xl " title="{roleX} ">
-                         <img src="./images/def.png" class="h-7 " alt="">
-                         <p class="text-white font-thin tracking-[1px]">Hisoka Bilal</p>
-                         <button class="text-black font-[200] text-lg mt-[-4px] self-start hover:text-red-500 ">x</button>
-            </div>
-     </div>
 
-</div>
 
    
 </body>
