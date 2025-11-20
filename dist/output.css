@@ -582,6 +582,10 @@ video {
   z-index: 50;
 }
 
+.z-20 {
+  z-index: 20;
+}
+
 .col-span-1 {
   grid-column: span 1 / span 1;
 }
@@ -644,6 +648,10 @@ video {
   display: grid;
 }
 
+.hidden {
+  display: none;
+}
+
 .h-10 {
   height: 2.5rem;
 }
@@ -674,6 +682,10 @@ video {
 
 .h-full {
   height: 100%;
+}
+
+.h-\[30px\] {
+  height: 30px;
 }
 
 .max-h-\[60px\] {
@@ -962,6 +974,101 @@ video {
   background-color: rgb(202 138 4 / var(--tw-bg-opacity, 1));
 }
 
+.bg-\[\] {
+  background-color: ;
+}
+
+.bg-\[red\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 0 0 / var(--tw-bg-opacity, 1));
+}
+
+.bg-\[\#727272\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(114 114 114 / var(--tw-bg-opacity, 1));
+}
+
+.bg-\[\#912d2d\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(145 45 45 / var(--tw-bg-opacity, 1));
+}
+
+.bg-\[\#442c2c\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(68 44 44 / var(--tw-bg-opacity, 1));
+}
+
+.bg-\[\#938989\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(147 137 137 / var(--tw-bg-opacity, 1));
+}
+
+.bg-\[\#c3bebe\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(195 190 190 / var(--tw-bg-opacity, 1));
+}
+
+.bg-\[\#949292\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(148 146 146 / var(--tw-bg-opacity, 1));
+}
+
+.bg-\[\#949292b1\] {
+  background-color: #949292b1;
+}
+
+.bg-\[\#94929287\] {
+  background-color: #94929287;
+}
+
+.bg-\[\#949292a3\] {
+  background-color: #949292a3;
+}
+
+.bg-\[\#101010a3\] {
+  background-color: #101010a3;
+}
+
+.bg-\[\#1010106f\] {
+  background-color: #1010106f;
+}
+
+.bg-\[\#ffffff6f\] {
+  background-color: #ffffff6f;
+}
+
+.bg-\[\#ffffff88\] {
+  background-color: #ffffff88;
+}
+
+.bg-\[\#ffffff65\] {
+  background-color: #ffffff65;
+}
+
+.bg-\[\#ffffff6b\] {
+  background-color: #ffffff6b;
+}
+
+.bg-\[\#ffffff86\] {
+  background-color: #ffffff86;
+}
+
+.bg-\[\#5c5b5b86\] {
+  background-color: #5c5b5b86;
+}
+
+.bg-\[\#807f7f86\] {
+  background-color: #807f7f86;
+}
+
+.bg-\[\#807f7f77\] {
+  background-color: #807f7f77;
+}
+
+.bg-\[\#807f7f8a\] {
+  background-color: #807f7f8a;
+}
+
 .p-1 {
   padding: 0.25rem;
 }
@@ -984,6 +1091,14 @@ video {
 
 .p-8 {
   padding: 2rem;
+}
+
+.p-12 {
+  padding: 3rem;
+}
+
+.p-14 {
+  padding: 3.5rem;
 }
 
 .px-10 {
@@ -1024,6 +1139,16 @@ video {
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 
 .pb-0 {

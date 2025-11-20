@@ -31,7 +31,7 @@
 
 /* scroll style */
 
-.pnx::-webkit-scrollbar{
+#list_wrks::-webkit-scrollbar{
       width: 0px;
 }
 
