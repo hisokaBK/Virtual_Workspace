@@ -29,6 +29,7 @@ let valeusForm={
      experiences:''
 
 };
+
 //image
 const photoWorker=document.querySelector('#photo');
 photoWorker.addEventListener('change',(e)=>{
