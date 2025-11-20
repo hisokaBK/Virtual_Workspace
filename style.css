@@ -34,4 +34,6 @@
 #list_wrks::-webkit-scrollbar{
       width: 0px;
 }
-
+.exprX::-webkit-scrollbar{
+      width: 0px;
+}
