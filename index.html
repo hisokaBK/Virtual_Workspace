@@ -63,8 +63,6 @@
                          <button class="text-white font-[200] text-2xl self-start hover:text-red-500">x</button>
                     </div>
                     
-
-                    
                  </div>
 
                  <div class=" m-2">
@@ -73,13 +71,13 @@
                  </div>
             </aside>
 
-        <!-- ----------------------work-space------------------------------ -->
+        <!-- ---------------------work-space----------------------------- -->
         
-            <div class="work_space bg-[url('/images/background1.png')] bg-cover col-span-3 border-4  h-[500px]]">
+            <div class="work_space col-span-3 border-4 relative ">
 
         <!-- -------------- reception --------------------- -->
 
-                  <div title="reception" class="reception  flex flex-col justify-around bg-black opacity-50">
+                  <div title="reception" class="reception  flex flex-col justify-around z-50 bg-black  opacity-50">
                        <div class=" text-black flex justify-center ">
                           <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
                        </div>
@@ -93,7 +91,7 @@
 
         <!-- -------------- conference --------------------- -->
 
-                   <div title="conference" class="item2 flex flex-col justify-around  opacity-30 bg-red-500">
+                   <div title="conference" class="item2 flex flex-col justify-around  opacity-30 z-50 bg-red-500">
                            
                          <div class=" text-black flex justify-around">
                           <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
@@ -111,7 +109,7 @@
 
         <!-- -------------- personnel --------------------- -->
 
-                   <div title="personnel" class="item3 flex flex-col justify-around  opacity-30 bg-yellow-600">
+                   <div title="personnel" class="item3 flex flex-col justify-around  opacity-30 z-50 bg-yellow-600">
                      
                        <div class=" text-black flex justify-around">
                           <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
@@ -129,7 +127,7 @@
 
         <!-- -------------- serveurs --------------------- -->
                    
-                   <div title="serveurs" class="item4 flex flex-col justify-around opacity-30 bg-violet-500">
+                   <div title="serveurs" class="item4 flex flex-col justify-around opacity-30 z-50 bg-violet-500">
                         
                        <div class=" text-black flex justify-around">
                           <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
@@ -145,7 +143,7 @@
                    
         <!-- -------------- secusite --------------------- -->
 
-                   <div title="secusite" class="item5 flex flex-col justify-around opacity-30 bg-teal-500">
+                   <div title="secusite" class="item5 flex flex-col justify-around opacity-30 z-50 bg-teal-500">
 
                         <div class=" text-black flex justify-around">
                           <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
@@ -160,13 +158,17 @@
 
         <!-- -------------- archives --------------------- -->
 
-                   <div title="archives" class="item6 flex flex-col justify-around  opacity-30 bg-orange-600">
+                   <div title="archives" class="item6 flex flex-col justify-around  opacity-30 z-50 bg-orange-600">
                          <div class="flex justify-around">
                           <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
                           <div class="bg-white h-[40px] border-[2px] hover:scale-105 cursor-pointer border-black w-[40px] flex justify-center items-center "><p>+</p></div>
                        </div> 
                    </div>
+                   <!-- bg-img -->
+                   <div class="w-full h-full absolute top-0 left-0"><img src="./images/background1.png" alt="" class="w-full h-full"></div>
             </div>
+
+            
         </section>
       
     </main>
@@ -191,7 +193,6 @@
     
         <form id="employeeForm" class="border px-8 rounded-3xl pt-4 bg-black flex flex-col w-[50%]">
          
-    
           <div>
             <label class="block pt-4" for="photo">Photo URL </label>
             <input class="bg-[#38363610] hover:border-white focus:border-white border-gray-500 border-b outline-none rounded w-[80%] h-10 pl-4 ml-10" type="text" id="photo" placeholder="images.photo.jpg">
@@ -264,6 +265,18 @@
    </div>
    <div class="text-center text-lg pt-5 pb-3 text-gray-500">&copy; YouCode 2025 - 2026</div>
   </div>
+</div>
+
+<div class="bg-red-50 h-[400px]">
+        <div class="hover:scale-105 cursor-pointer w-[30px] overflow-hidden hover:w-[200px] transition duration-300 hover">
+            <img src="./images/pin.png" class="h-[24px] relative top-4 left-[-2px]" alt="">
+             <div class="p-1  pr-3 flex items-center justify-between  hover:bg-[#484747b1]  hover:shadow-[0px_0px_10px_#73737350]  w-[150px] rounded hover:rounded-2xl " title="{roleX} ">
+                         <img src="./images/def.png" class="h-7 " alt="">
+                         <p class="text-white font-thin tracking-[1px]">Hisoka Bilal</p>
+                         <button class="text-black font-[200] text-lg mt-[-4px] self-start hover:text-red-500 ">x</button>
+            </div>
+     </div>
+
 </div>
 
    
