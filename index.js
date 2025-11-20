@@ -2,13 +2,9 @@
 localStorage.setItem('listWrks','[]');
 let listWrks =JSON.parse(localStorage.getItem('listWrks'));
 
-
-
 //get experiences worker
   let expworkers=[];
   const form_experiences=document.querySelector(".exprX");
-
-
 
 let nomberExp=0;
 //add new experience
@@ -41,8 +37,7 @@ addExperienceBtn.addEventListener('click',()=>{
             </div>`;
 
             form_experiences.appendChild(newExp);
-
-  })
+})
 
 //get valeus form form inputs
 let valeusForm={
@@ -87,45 +82,6 @@ close_form.addEventListener('click',()=>{
 })
 
 
-
-// //image
-// const photoWorker=
-// photoWorker.addEventListener('change',(e)=>{
-//           valeusForm.img=e.target.value;
-// })
-
-// //name
-// const nameWorker=
-// nameWorker.addEventListener('change',(e)=>{
-//           valeusForm.nom=e.target.value;
-// })
-
-// //role
-// const roleWorker=
-// roleWorker.addEventListener('change',(e)=>{
-//           valeusForm.role=e.target.value;
-// })
-
-// //email
-// const emailWorker=
-// emailWorker.addEventListener('change',(e)=>{
-//           valeusForm.email=e.target.value;
-// })
-
-// //phone
-// const phoneWorker=
-// phoneWorker.addEventListener('change',(e)=>{
-//           valeusForm.phone=e.target.value;
-// })
-
-//expers===================><++++++++++
-// const experiencesWorker=document.querySelector('#experiences');
-// experiencesWorker.addEventListener('change',(e)=>{
-//           valeusForm.experiences=e.target.value;
-// })
-
-
-
 //add new Worker 
 document.querySelector('#employeeForm').addEventListener('submit',(e)=>{
             e.preventDefault(); 
@@ -141,7 +97,6 @@ document.querySelector('#employeeForm').addEventListener('submit',(e)=>{
                 
              }
           
-
             valeusForm.img=document.querySelector('#photo').value;
             valeusForm.nom=document.querySelector('#name').value;
             valeusForm.role=document.querySelector('#role').value;
@@ -149,7 +104,6 @@ document.querySelector('#employeeForm').addEventListener('submit',(e)=>{
             valeusForm.phone=document.querySelector('#phone').value;
             valeusForm.experiences=expworkers;
             
-
             console.log(valeusForm);
             formWrk.classList.remove('flex');
             formWrk.classList.add('hidden');
