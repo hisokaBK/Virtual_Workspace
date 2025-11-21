@@ -167,5 +167,61 @@ btnRmWorker.forEach(btn=>{
          })
 })
 
+//add worker to zone work 
+const listZone =document.querySelector('#listZone');
+const zone_wrks=document.querySelector('#zone_wrks');
+const spaces =document.querySelectorAll('.space');
+let workersZone ;
+spaces.forEach(space=>{
+         space.addEventListener('click',(e)=>{
+               listZone.classList.remove('hidden');
+               listZone.classList.add('flex');
+               
+               
+               let roleZone=e.target.parentNode.parentNode.title;
+               switch(roleZone){
+                     case 'personnel':
+                         listWrks.forEach(wrk=>{const zone_wr =document.createElement('div');
+                         zone_wr.innerHTML=`<div class="rounded-2xl p-1  pr-5 flex items-center justify-between  bg-[#48474750] hover:shadow-[0px_0px_10px_#73737350] hover:scale-105 transition duration-300 cursor-pointer" title="${wrk.role}">
+                               <img src="${wrk.img}" class="h-10 " alt="">
+                               <p class="text-white font-thin tracking-[1px] ml-[-60px] ">${wrk.nom}</p>
+                               <button data-id="${wrk.id}" class="remove_worker text-white font-[200] text-2xl self-start hover:text-red-500">x</button>
+                          </div>` ;
 
+                          zone_wrks.append(workersZone);
+
+                         })
+                         break;
+                             
+                     case '':
+                          workersZone=listWrks.filter(wrk=>wrk.role==roleZone)
+                         workersZone.forEach(wrk=>{const zone_wr =document.createElement('div');
+                         zone_wr.innerHTML=`<div class="rounded-2xl p-1  pr-5 flex items-center justify-between  bg-[#48474750] hover:shadow-[0px_0px_10px_#73737350] hover:scale-105 transition duration-300 cursor-pointer" title="${wrk.role}">
+                               <img src="${wrk.img}" class="h-10 " alt="">
+                               <p class="text-white font-thin tracking-[1px] ml-[-60px] ">${wrk.nom}</p>
+                               <button data-id="${wrk.id}" class="remove_worker text-white font-[200] text-2xl self-start hover:text-red-500">x</button>
+                          </div>` ;
+
+                          zone_wrks.append(workersZone);
+
+                         })
+                         break;
+
+               }
+         })
+})
+// const newWorker=document.createElement('div');
+//                   newWorker.innerHTML=`<div class="rounded-2xl p-1  pr-5 flex items-center justify-between  bg-[#48474750] hover:shadow-[0px_0px_10px_#73737350] hover:scale-105 transition duration-300 cursor-pointer" title="${Worker.role}">
+//                                <img src="${Worker.img}" class="h-10 " alt="">
+//                                <p class="text-white font-thin tracking-[1px] ml-[-60px] ">${Worker.nom}</p>
+//                                <button data-id="${Worker.id}" class="remove_worker text-white font-[200] text-2xl self-start hover:text-red-500">x</button>
+//                           </div>`
+                  
+//                   
+
+
+document.querySelector('#rmListZone').addEventListener('click',()=>{
+            listZone.classList.remove('flex');
+            listZone.classList.add('hidden');
+})
 
