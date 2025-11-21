@@ -1,5 +1,5 @@
-//localStorage for all list worker
 // localStorage.setItem('listWrks','[]');
+// localStorage.setItem('',{reception:[],conference:[],personnel:[],serveurs:[],securite:[],archives:[]})
 
 const list_wrks=document.querySelector('#list_wrks');
 
@@ -99,7 +99,6 @@ document.querySelector('#employeeForm').addEventListener('submit',(e)=>{
                    valeusForm.id=0;
               }
               
-
               const title=document.querySelectorAll('.exp_title');
               const exp_start=document.querySelectorAll('.exp_start');
               const exp_end=document.querySelectorAll('.exp_end');
@@ -158,7 +157,6 @@ document.querySelector('#employeeForm').addEventListener('submit',(e)=>{
 
 //remove worker 
 const btnRmWorker =document.querySelectorAll('.remove_worker');
-console.log(btnRmWorker)
 btnRmWorker.forEach(btn=>{
           btn.addEventListener('click',(e)=>{
                 listWrks=listWrks.filter((elm)=>elm.id!=e.target.dataset.id);
@@ -172,42 +170,114 @@ const listZone =document.querySelector('#listZone');
 const zone_wrks=document.querySelector('#zone_wrks');
 const spaces =document.querySelectorAll('.space');
 let workersZone ;
+
+//  localStorage.setItem('zonelises',JSON.stringify({reception:[],conference:[],personnel:[],serveurs:[],securite:[],archives:[]}))
+let zonelises=JSON.parse(localStorage.getItem('zonelises'));
+function listZoneWorkrs(listWorkr,zone){
+     listWorkr.forEach(wrk=>{
+         const zone_wr =document.createElement('div');
+         
+          
+         zone_wr.innerHTML=`<div  class="rounded-2xl p-1  pr-5 flex items-center   bg-[#48474750] hover:shadow-[0px_0px_10px_#73737350] gap-4 hover:scale-105 transition duration-300 cursor-pointer" title="${wrk.role}">
+               <img src="${wrk.img}" class="h-10 " alt="">
+               <p class="text-white font-thin tracking-[1px]  ">${wrk.nom}</p>
+         
+          </div>` ;
+          zone_wrks.append(zone_wr);
+         
+           
+           zone_wr.addEventListener('click',(elm)=>{
+               switch(zone){
+                    case 'personnel':
+                        zonelises={...zonelises,personnel:[...zonelises.personnel,{ id:wrk.id,img:wrk.img,nom:wrk.nom,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};
+
+                      break ;
+                    
+                    case 'serveurs':
+                         zonelises={...zonelises,serveurs:[...zonelises.serveurs,{ id:wrk.id,img:wrk.img,nom:wrk.nom,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};
+                       break ;
+
+                    case 'securite':
+                         zonelises={...zonelises,securite:[...zonelises.securite,{ id:wrk.id,img:wrk.img,nom:wrk.nom,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};
+                        break ;
+
+                    case 'conference':
+                         zonelises={...zonelises,conference:[...zonelises.conference,{ id:wrk.id,img:wrk.img,nom:wrk.nom,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};    
+                       break ;
+
+                    case 'archives':
+                         zonelises={...zonelises,archives:[...zonelises.archives,{ id:wrk.id,img:wrk.img,nom:wrk.nom,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};
+                       break ;
+                         
+                    case 'reception':
+                         if(zonelises.reception.length>=3){
+                               alert('reception zone Plein');
+                               return;
+                         }
+                         zonelises={...zonelises,reception:[...zonelises.reception,{ id:wrk.id,img:wrk.img,nom:wrk.nom,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};
+                      break ;
+   
+                    default :
+                        return ;
+               }
+                localStorage.setItem('zonelises',JSON.stringify(zonelises));
+               listWrks=listWrks.filter(worker=>worker.id!=wrk.id);
+               localStorage.setItem('listWrks',JSON.stringify(listWrks));
+               window.location.reload();
+                 
+           })
+     })
+ }
+
+
 spaces.forEach(space=>{
          space.addEventListener('click',(e)=>{
                listZone.classList.remove('hidden');
                listZone.classList.add('flex');
-               
-               let roleZone=e.target.parentNode.parentNode.title;
-               console.log(roleZone);
-               switch(roleZone){
-                     case 'personnel':
-                         listWrks.forEach(wrk=>{const zone_wr =document.createElement('div');
-                         zone_wr.innerHTML=`<div class="rounded-2xl p-1  pr-5 flex items-center justify-between  bg-[#48474750] hover:shadow-[0px_0px_10px_#73737350] hover:scale-105 transition duration-300 cursor-pointer" title="${wrk.role}">
-                               <img src="${wrk.img}" class="h-10 " alt="">
-                               <p class="text-white font-thin tracking-[1px] ml-[-60px] ">${wrk.nom}</p>
-                               <button data-id="${wrk.id}" class="remove_worker text-white font-[200] text-2xl self-start hover:text-red-500">x</button>
-                          </div>` ;
 
-                          zone_wrks.append(workersZone);
-
-                         })
-                         break;
-                             
-                     case '':
-                          workersZone=listWrks.filter(wrk=>wrk.role==roleZone)
-                         workersZone.forEach(wrk=>{const zone_wr =document.createElement('div');
-                         zone_wr.innerHTML=`<div class="rounded-2xl p-1  pr-5 flex items-center justify-between  bg-[#48474750] hover:shadow-[0px_0px_10px_#73737350] hover:scale-105 transition duration-300 cursor-pointer" title="${wrk.role}">
-                               <img src="${wrk.img}" class="h-10 " alt="">
-                               <p class="text-white font-thin tracking-[1px] ml-[-60px] ">${wrk.nom}</p>
-                               <button data-id="${wrk.id}" class="remove_worker text-white font-[200] text-2xl self-start hover:text-red-500">x</button>
-                          </div>` ;
-
-                          zone_wrks.append(workersZone);
-
-                         })
-                         break;
-
+               if(Array.from(zone_wrks.children).length>0){
+                   Array.from(zone_wrks.children).forEach(elm=>elm.remove());
                }
+               
+               let roleZone=e.target.parentElement.parentElement.title;
+  
+               switch(roleZone){
+                    case 'personnel':
+                        listZoneWorkrs(listWrks,'personnel');
+
+                      break ;
+                    
+                    case 'serveurs':
+                         workersZone=listWrks.filter(elm=>elm.role=='it'||elm.role=='Nettoyage');
+                         listZoneWorkrs(workersZone,'serveurs');
+
+
+                      break ;
+
+                      case 'securite':
+                         workersZone=listWrks.filter(elm=>elm.role=='securite'||elm.role=='Nettoyage');
+                         listZoneWorkrs(workersZone,'securite');
+                         break ;
+
+                      case 'conference':
+                             listZoneWorkrs(listWrks,'conference');    
+                         break ;
+
+                      case 'archives':
+                         workersZone=listWrks.filter(elm=>elm.role!='Nettoyage');
+                         listZoneWorkrs(workersZone,'archives');
+                         break ;
+                         
+                      case 'reception':
+                         workersZone=listWrks.filter(elm=>elm.role=='reception'||elm.role=='Nettoyage');
+                         listZoneWorkrs(workersZone,'reception');
+                         break ;
+ 
+                    default :
+                        return ;
+                    }
+
+          
          })
 })
                
@@ -215,4 +285,3 @@ document.querySelector('#rmListZone').addEventListener('click',()=>{
             listZone.classList.remove('flex');
             listZone.classList.add('hidden');
 })
-
