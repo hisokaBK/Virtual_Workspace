@@ -1,29 +1,25 @@
 //localStorage for all list worker
 // localStorage.setItem('listWrks','[]');
 
-//dev side list workers
 const list_wrks=document.querySelector('#list_wrks');
 
-//push the element in local storage to side listworkers
 let listWrks =JSON.parse(localStorage.getItem('listWrks'));
 listWrks.forEach(Worker=>{
                   const newWorker=document.createElement('div');
                   newWorker.innerHTML=`<div class="rounded-2xl p-1  pr-5 flex items-center justify-between  bg-[#48474750] hover:shadow-[0px_0px_10px_#73737350] hover:scale-105 transition duration-300 cursor-pointer" title="${Worker.role}">
                                <img src="${Worker.img}" class="h-10 " alt="">
                                <p class="text-white font-thin tracking-[1px] ml-[-60px] ">${Worker.nom}</p>
-                               <button class="text-white font-[200] text-2xl self-start hover:text-red-500">x</button>
+                               <button data-id="${Worker.id}" class="remove_worker text-white font-[200] text-2xl self-start hover:text-red-500">x</button>
                           </div>`
                   
                   list_wrks.append(newWorker);
             })
 
-
-//get experiences worker
   let expworkers=[];
   const form_experiences=document.querySelector(".exprX");
 
 let nomberExp=0;
-//add new experience
+
 const addExperienceBtn =document.querySelector('#addExperienceBtn');
 addExperienceBtn.addEventListener('click',()=>{
           nomberExp++;
@@ -55,8 +51,8 @@ addExperienceBtn.addEventListener('click',()=>{
             form_experiences.appendChild(newExp);
 })
 
-//get valeus form form inputs
 let valeusForm={
+     id:0,
      img:'',
      nom:'',
      role:'',
@@ -65,44 +61,45 @@ let valeusForm={
      experiences:expworkers
 };
 
-//remove experience x
 function removeExp(e){
                    e.parentNode.parentNode.remove();
                    nomberExp--;
             }
 
-
-//affecher form
 const btnAddWrk =document.querySelector('#btnAddWrk');
 const formWrk=document.querySelector('#addEmployeeModal');
 
 btnAddWrk.addEventListener('click',()=>{
             formWrk.classList.remove('hidden');
             formWrk.classList.add('flex');
-            valeusForm={
-                  img:'',
-                  nom:'',
-                  role:'',
-                  email:'',
-                  phone:'',
-                  experiences:[]
-             };
+          //   valeusForm={
+          //         id:0,
+          //         img:'',
+          //         nom:'',
+          //         role:'',
+          //         email:'',
+          //         phone:'',
+          //         experiences:[]
+          //    };
 
 })
 
-//hidden form
 const close_form =document.querySelector('#close_form');
 close_form.addEventListener('click',()=>{
             formWrk.classList.remove('flex');
             formWrk.classList.add('hidden');
 })
 
-
-//add new Worker 
+//add worker form
 document.querySelector('#employeeForm').addEventListener('submit',(e)=>{
-            e.preventDefault(); 
+              e.preventDefault(); 
+              if(listWrks.length>0){
+                      valeusForm.id=listWrks[listWrks.length-1].id+1;
+              }else{
+                   valeusForm.id=0;
+              }
+              
 
-            //expers
               const title=document.querySelectorAll('.exp_title');
               const exp_start=document.querySelectorAll('.exp_start');
               const exp_end=document.querySelectorAll('.exp_end');
@@ -115,58 +112,60 @@ document.querySelector('#employeeForm').addEventListener('submit',(e)=>{
                  }
               }
              
-
-          //inputs values
              if(document.querySelector('#photo').value==''){
                   valeusForm.img='./images/def.png';
              }else{
                   valeusForm.img=document.querySelector('#photo').value;
              }
 
-            valeusForm.nom=document.querySelector('#name').value;
+            valeusForm.nom=document.querySelector('#name').value.trim();
+             
+            let checkNameExst=listWrks.find((elm)=>elm.nom==valeusForm.nom) 
+            if(checkNameExst){
+                    alert ('worker already exists');
+                    return ;
+            }
+
             valeusForm.role=document.querySelector('#role').value;
             valeusForm.email=document.querySelector('#email').value;
             valeusForm.phone=document.querySelector('#phone').value;
             valeusForm.experiences=expworkers;
 
-            //update local storage
             let dataSorage=JSON.parse(localStorage.getItem('listWrks'));
             dataSorage=[...dataSorage,valeusForm]
             localStorage.setItem('listWrks',JSON.stringify(dataSorage));
 
-            //delete old workers
             if (Array.from(list_wrks.children).length != 0) {
                      Array.from(list_wrks.children).forEach(worker => {
                       worker.remove();
                   });
                 }
                 
-            //create and add new workers
-            dataSorage.forEach(Worker=>{
-                  const newWorker=document.createElement('div');
-                  newWorker.innerHTML=`<div class="rounded-2xl p-1  pr-5 flex items-center justify-between  bg-[#48474750] hover:shadow-[0px_0px_10px_#73737350] hover:scale-105 transition duration-300 cursor-pointer" title="${Worker.role}">
-                               <img src="${Worker.img}" class="h-10 " alt="">
-                               <p class="text-white font-thin tracking-[1px] ml-[-60px] ">${Worker.nom}</p>
-                               <button class="text-white font-[200] text-2xl self-start hover:text-red-500">x</button>
-                          </div>`
-                  
-                  list_wrks.append(newWorker);
-            })
-            
-            
+             
             formWrk.classList.remove('flex');
             formWrk.classList.add('hidden');  
             nomberExp=0;  
              
-            //reinitialiser les inputs form en fin
             document.querySelector('#name').value ='';
             document.querySelector('#role').value ='';
             document.querySelector('#email').value='';
             document.querySelector('#phone').value='';
             document.querySelector('#photo').value='';
             Array.from(form_experiences.children).forEach(elm=>{elm.remove()});
+            window.location.reload();
 
-            
 })
+
+//remove worker 
+const btnRmWorker =document.querySelectorAll('.remove_worker');
+console.log(btnRmWorker)
+btnRmWorker.forEach(btn=>{
+          btn.addEventListener('click',(e)=>{
+                listWrks=listWrks.filter((elm)=>elm.id!=e.target.dataset.id);
+                localStorage.setItem('listWrks',JSON.stringify(listWrks))
+                window.location.reload();
+         })
+})
+
 
 
