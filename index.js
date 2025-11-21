@@ -177,8 +177,8 @@ spaces.forEach(space=>{
                listZone.classList.remove('hidden');
                listZone.classList.add('flex');
                
-               
                let roleZone=e.target.parentNode.parentNode.title;
+               console.log(roleZone);
                switch(roleZone){
                      case 'personnel':
                          listWrks.forEach(wrk=>{const zone_wr =document.createElement('div');
@@ -210,16 +210,7 @@ spaces.forEach(space=>{
                }
          })
 })
-// const newWorker=document.createElement('div');
-//                   newWorker.innerHTML=`<div class="rounded-2xl p-1  pr-5 flex items-center justify-between  bg-[#48474750] hover:shadow-[0px_0px_10px_#73737350] hover:scale-105 transition duration-300 cursor-pointer" title="${Worker.role}">
-//                                <img src="${Worker.img}" class="h-10 " alt="">
-//                                <p class="text-white font-thin tracking-[1px] ml-[-60px] ">${Worker.nom}</p>
-//                                <button data-id="${Worker.id}" class="remove_worker text-white font-[200] text-2xl self-start hover:text-red-500">x</button>
-//                           </div>`
-                  
-//                   
-
-
+               
 document.querySelector('#rmListZone').addEventListener('click',()=>{
             listZone.classList.remove('flex');
             listZone.classList.add('hidden');
