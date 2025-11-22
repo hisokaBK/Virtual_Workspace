@@ -1,5 +1,4 @@
 // localStorage.setItem('listWrks','[]');
-// localStorage.setItem('',{reception:[],conference:[],personnel:[],serveurs:[],securite:[],archives:[]})
 
 const list_wrks=document.querySelector('#list_wrks');
 
@@ -72,15 +71,6 @@ const formWrk=document.querySelector('#addEmployeeModal');
 btnAddWrk.addEventListener('click',()=>{
             formWrk.classList.remove('hidden');
             formWrk.classList.add('flex');
-          //   valeusForm={
-          //         id:0,
-          //         img:'',
-          //         nom:'',
-          //         role:'',
-          //         email:'',
-          //         phone:'',
-          //         experiences:[]
-          //    };
 
 })
 
@@ -190,23 +180,38 @@ function listZoneWorkrs(listWorkr,zone){
                switch(zone){
                     case 'personnel':
                         zonelises={...zonelises,personnel:[...zonelises.personnel,{ id:wrk.id,img:wrk.img,nom:wrk.nom,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};
+                        
 
+                             
                       break ;
                     
                     case 'serveurs':
                          zonelises={...zonelises,serveurs:[...zonelises.serveurs,{ id:wrk.id,img:wrk.img,nom:wrk.nom,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};
+                         
                        break ;
 
                     case 'securite':
                          zonelises={...zonelises,securite:[...zonelises.securite,{ id:wrk.id,img:wrk.img,nom:wrk.nom,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};
+                         if(zonelises.securite>0){
+                                document.querySelector('#securite').classList.remove('bg-[#c5303036]')
+                          }else{
+                                document.querySelector('#securite').classList.remove('bg-[#c5303036]')
+                               
+                          }
                         break ;
 
                     case 'conference':
-                         zonelises={...zonelises,conference:[...zonelises.conference,{ id:wrk.id,img:wrk.img,nom:wrk.nom,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};    
+                         zonelises={...zonelises,conference:[...zonelises.conference,{ id:wrk.id,img:wrk.img,nom:wrk.nom,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};
                        break ;
 
                     case 'archives':
                          zonelises={...zonelises,archives:[...zonelises.archives,{ id:wrk.id,img:wrk.img,nom:wrk.nom,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};
+                          if(zonelises.archives>0){
+                                document.querySelector('#archives').classList.remove('bg-[#c5303036]')
+                          }else{
+                                document.querySelector('#archives').classList.remove('bg-[#c5303036]')
+                               
+                          }
                        break ;
                          
                     case 'reception':
@@ -215,6 +220,11 @@ function listZoneWorkrs(listWorkr,zone){
                                return;
                          }
                          zonelises={...zonelises,reception:[...zonelises.reception,{ id:wrk.id,img:wrk.img,nom:wrk.nom,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};
+                         if(zonelises.reception>0){
+                                document.querySelector('#reception').classList.remove('bg-[#c5303036]')
+                          }else{
+                                document.querySelector('#reception').classList.remove('bg-[#c5303036]')
+                          }
                       break ;
    
                     default :
@@ -277,11 +287,55 @@ spaces.forEach(space=>{
                         return ;
                     }
 
-          
+              
          })
 })
-               
+
+
 document.querySelector('#rmListZone').addEventListener('click',()=>{
             listZone.classList.remove('flex');
             listZone.classList.add('hidden');
 })
+
+
+function changeElementsZone(zone) {
+    const elmZone = document.querySelectorAll(`[data-space="${zone}"]`);
+
+    const workers = zonelises[zone];
+
+    if(workers<=0 && zone!='personnel'&&zone!='conference'){
+        document.querySelector(`#${zone}`).classList.add('bg-[#c5303036]');
+        return;
+    }
+
+     if(zone!='personnel'||zone!='conference'){
+          document.querySelector(`#${zone}`).classList.remove('bg-[#c5303036]'); 
+     }
+                
+     for (let i = 0; i < workers.length; i++) {
+        const elmn = document.createElement('div');
+        elmn.innerHTML = `
+            <div class="hover:scale-105 cursor-pointer w-[30px] overflow-hidden hover:w-[200px] transition duration-300">
+                <img src="./images/pin.png" class="h-[20px] relative top-5 left-[-2px]" alt="">
+                <div class="p-1 pr-3 flex items-center justify-between hover:bg-[#000000d4] hover:shadow-[0px_0px_10px_#73737350] w-[150px] rounded hover:rounded-2xl">
+                    <img src="./${workers[i].img}" class="h-7" alt="">
+                    <p class="text-white font-thin tracking-[1px]">${workers[i].nom}</p>
+                    <button class="text-white font-[200] text-lg mt-[-4px] self-start hover:text-red-500">x</button>
+                </div>
+            </div>
+        `;
+     elmZone[i].replaceWith(elmn);
+    
+}
+}
+
+
+changeElementsZone('securite');
+changeElementsZone('serveurs');
+changeElementsZone('personnel');
+changeElementsZone('conference');
+changeElementsZone('reception');
+changeElementsZone('archives');
+
+
+
