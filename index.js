@@ -1,19 +1,30 @@
 // localStorage.setItem('listWrks','[]');
+// localStorage.setItem('zonelises',JSON.stringify({reception:[],conference:[],personnel:[],serveurs:[],securite:[],archives:[]}))
+// localStorage.setItem('id',0);
+
 
 const list_wrks=document.querySelector('#list_wrks');
-
 let listWrks =JSON.parse(localStorage.getItem('listWrks'));
+
+const workerDetails=document.querySelector('#workerDetails');
+// console.log(listWrks);
 listWrks.forEach(Worker=>{
+     //add new workwt list side bar--------------------
                   const newWorker=document.createElement('div');
-                  newWorker.innerHTML=`<div class="rounded-2xl p-1  pr-5 flex items-center justify-between  bg-[#48474750] hover:shadow-[0px_0px_10px_#73737350] hover:scale-105 transition duration-300 cursor-pointer" title="${Worker.role}">
-                               <img src="${Worker.img}" class="h-10 " alt="">
-                               <p class="text-white font-thin tracking-[1px] ml-[-60px] ">${Worker.nom}</p>
+                  newWorker.innerHTML=`<div data-zone='' data-check='${Worker.id}'  class="dtails rounded-2xl p-1  pr-5 flex items-center justify-between  bg-[#48474750] hover:shadow-[0px_0px_10px_#73737350] hover:scale-105 transition duration-300 cursor-pointer" title="${Worker.role}">
+                               <img src="${Worker.img}" class="h-9 rounded-full" alt="">
+                               <p class="text-white font-thin tracking-[1px] ml-[-50px] ">${Worker.nom}</p>
                                <button data-id="${Worker.id}" class="remove_worker text-white font-[200] text-2xl self-start hover:text-red-500">x</button>
                           </div>`
                   
                   list_wrks.append(newWorker);
-            })
+               
+        })
 
+
+        
+
+//add experiences user-------------------------------
   let expworkers=[];
   const form_experiences=document.querySelector(".exprX");
 
@@ -29,16 +40,16 @@ addExperienceBtn.addEventListener('click',()=>{
                    <span onclick="removeExp(this)" class="close-btn text-gray-300 font-[200] text-[25px] self-start hover:text-white cursor-pointer  px-1 " id="close_form">x</span>
                </div>
                  <div class="exprX flex flex-col gap-3 pb-2">
-                    <input type="text" class="exp_title bg-[#38363610] hover:border-white focus:border-white border-gray-500 border outline-none rounded w-[80%] h-10 pl-4 ml-10">
+                    <input type="text" required placeholder="company" class="exp_title bg-[#38363610] hover:border-white focus:border-white border-gray-500 border outline-none rounded w-[80%] h-10 pl-4 ml-10">
                     <div class="experience-item">
                        <div class="justify-self-center my-3 flex flex-col items-center gap-4">
                          <div>
                               <label for="exp_start">start :</label> 
-                              <input id="exp_start" type="date" class="exp_start text-black rounded px-2" >
+                              <input id="exp_start" required type="date" class="exp_start text-black rounded px-2" >
                          </div>
                           <div>
                               <label for="exp-end">end : </label>
-                              <input type="date" class="exp_end text-black rounded px-2" >
+                              <input type="date" required class="exp_end text-black rounded px-2" >
                           </div>
                        </div>
                     </div>
@@ -47,13 +58,14 @@ addExperienceBtn.addEventListener('click',()=>{
                 </div>
             </div>`;
 
-            form_experiences.appendChild(newExp);
+        form_experiences.appendChild(newExp);
 })
 
 let valeusForm={
      id:0,
      img:'',
      nom:'',
+     location:'',
      role:'',
      email:'',
      phone:'',
@@ -65,13 +77,14 @@ function removeExp(e){
                    nomberExp--;
             }
 
+
+//add worker form-----------------------------
 const btnAddWrk =document.querySelector('#btnAddWrk');
 const formWrk=document.querySelector('#addEmployeeModal');
 
 btnAddWrk.addEventListener('click',()=>{
             formWrk.classList.remove('hidden');
             formWrk.classList.add('flex');
-
 })
 
 const close_form =document.querySelector('#close_form');
@@ -80,11 +93,13 @@ close_form.addEventListener('click',()=>{
             formWrk.classList.add('hidden');
 })
 
-//add worker form
+
+let id=localStorage.getItem('id');
 document.querySelector('#employeeForm').addEventListener('submit',(e)=>{
               e.preventDefault(); 
               if(listWrks.length>0){
-                      valeusForm.id=listWrks[listWrks.length-1].id+1;
+                      valeusForm.id=++id;
+                      localStorage.setItem('id',id);
               }else{
                    valeusForm.id=0;
               }
@@ -107,17 +122,39 @@ document.querySelector('#employeeForm').addEventListener('submit',(e)=>{
                   valeusForm.img=document.querySelector('#photo').value;
              }
 
+            
+            valeusForm.location=document.querySelector('#location').value.trim();
+             if (valeusForm.location.length < 3) {
+                 alert("La localisation doit contenir au moins 3 lettres");
+                 return;
+             }
+
             valeusForm.nom=document.querySelector('#name').value.trim();
-             
-            let checkNameExst=listWrks.find((elm)=>elm.nom==valeusForm.nom) 
+             if (valeusForm.nom.length < 3) {
+                alert("Le nom doit contenir au moins 3 caractères");
+                return;
+            } 
+            let checkNameExst=listWrks.find((elm)=>elm.nom==valeusForm.nom)
             if(checkNameExst){
                     alert ('worker already exists');
                     return ;
             }
 
             valeusForm.role=document.querySelector('#role').value;
-            valeusForm.email=document.querySelector('#email').value;
-            valeusForm.phone=document.querySelector('#phone').value;
+            valeusForm.email=document.querySelector('#email').value.trim();
+            let emailRegex = /^[a-zA-Z0-9._%+-]{3,}@[a-zA-Z0-9.-]{2,}\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(valeusForm.email)) {
+                alert("Email invalide (ex: name@gmail.com)");
+                return;
+            }
+
+            valeusForm.phone=document.querySelector('#phone').value.trim();
+            let phoneRegex = /^06\d{8}$/;
+            if (!phoneRegex.test(valeusForm.phone)) {
+                alert("Numéro de téléphone invalide. Il doit commencer par 06 et contenir 10 chiffres.");
+                return;
+            }
+
             valeusForm.experiences=expworkers;
 
             let dataSorage=JSON.parse(localStorage.getItem('listWrks'));
@@ -129,13 +166,13 @@ document.querySelector('#employeeForm').addEventListener('submit',(e)=>{
                       worker.remove();
                   });
                 }
-                
              
             formWrk.classList.remove('flex');
             formWrk.classList.add('hidden');  
             nomberExp=0;  
              
             document.querySelector('#name').value ='';
+            document.querySelector('#location').value ='';
             document.querySelector('#role').value ='';
             document.querySelector('#email').value='';
             document.querySelector('#phone').value='';
@@ -145,113 +182,33 @@ document.querySelector('#employeeForm').addEventListener('submit',(e)=>{
 
 })
 
-//remove worker 
+//remove worker------------------------------
 const btnRmWorker =document.querySelectorAll('.remove_worker');
 btnRmWorker.forEach(btn=>{
           btn.addEventListener('click',(e)=>{
+                e.stopPropagation();
                 listWrks=listWrks.filter((elm)=>elm.id!=e.target.dataset.id);
                 localStorage.setItem('listWrks',JSON.stringify(listWrks))
                 window.location.reload();
          })
 })
 
-//add worker to zone work 
+//add worker to zone work--------------------------
 const listZone =document.querySelector('#listZone');
 const zone_wrks=document.querySelector('#zone_wrks');
 const spaces =document.querySelectorAll('.space');
 let workersZone ;
 
-//  localStorage.setItem('zonelises',JSON.stringify({reception:[],conference:[],personnel:[],serveurs:[],securite:[],archives:[]}))
 let zonelises=JSON.parse(localStorage.getItem('zonelises'));
-function listZoneWorkrs(listWorkr,zone){
-     listWorkr.forEach(wrk=>{
-         const zone_wr =document.createElement('div');
-         
-          
-         zone_wr.innerHTML=`<div  class="rounded-2xl p-1  pr-5 flex items-center   bg-[#48474750] hover:shadow-[0px_0px_10px_#73737350] gap-4 hover:scale-105 transition duration-300 cursor-pointer" title="${wrk.role}">
-               <img src="${wrk.img}" class="h-10 " alt="">
-               <p class="text-white font-thin tracking-[1px]  ">${wrk.nom}</p>
-         
-          </div>` ;
-          zone_wrks.append(zone_wr);
-         
-           
-           zone_wr.addEventListener('click',(elm)=>{
-               switch(zone){
-                    case 'personnel':
-                        zonelises={...zonelises,personnel:[...zonelises.personnel,{ id:wrk.id,img:wrk.img,nom:wrk.nom,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};
-                        
-
-                             
-                      break ;
-                    
-                    case 'serveurs':
-                         zonelises={...zonelises,serveurs:[...zonelises.serveurs,{ id:wrk.id,img:wrk.img,nom:wrk.nom,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};
-                         
-                       break ;
-
-                    case 'securite':
-                         zonelises={...zonelises,securite:[...zonelises.securite,{ id:wrk.id,img:wrk.img,nom:wrk.nom,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};
-                         if(zonelises.securite>0){
-                                document.querySelector('#securite').classList.remove('bg-[#c5303036]')
-                          }else{
-                                document.querySelector('#securite').classList.remove('bg-[#c5303036]')
-                               
-                          }
-                        break ;
-
-                    case 'conference':
-                         zonelises={...zonelises,conference:[...zonelises.conference,{ id:wrk.id,img:wrk.img,nom:wrk.nom,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};
-                       break ;
-
-                    case 'archives':
-                         zonelises={...zonelises,archives:[...zonelises.archives,{ id:wrk.id,img:wrk.img,nom:wrk.nom,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};
-                          if(zonelises.archives>0){
-                                document.querySelector('#archives').classList.remove('bg-[#c5303036]')
-                          }else{
-                                document.querySelector('#archives').classList.remove('bg-[#c5303036]')
-                               
-                          }
-                       break ;
-                         
-                    case 'reception':
-                         if(zonelises.reception.length>=3){
-                               alert('reception zone Plein');
-                               return;
-                         }
-                         zonelises={...zonelises,reception:[...zonelises.reception,{ id:wrk.id,img:wrk.img,nom:wrk.nom,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};
-                         if(zonelises.reception>0){
-                                document.querySelector('#reception').classList.remove('bg-[#c5303036]')
-                          }else{
-                                document.querySelector('#reception').classList.remove('bg-[#c5303036]')
-                          }
-                      break ;
-   
-                    default :
-                        return ;
-               }
-                localStorage.setItem('zonelises',JSON.stringify(zonelises));
-               listWrks=listWrks.filter(worker=>worker.id!=wrk.id);
-               localStorage.setItem('listWrks',JSON.stringify(listWrks));
-               window.location.reload();
-                 
-           })
-     })
- }
-
 
 spaces.forEach(space=>{
          space.addEventListener('click',(e)=>{
                listZone.classList.remove('hidden');
                listZone.classList.add('flex');
-
-               if(Array.from(zone_wrks.children).length>0){
-                   Array.from(zone_wrks.children).forEach(elm=>elm.remove());
-               }
                
-               let roleZone=e.target.parentElement.parentElement.title;
+               let titleZone=e.target.parentElement.parentElement.title;
   
-               switch(roleZone){
+               switch(titleZone){
                     case 'personnel':
                         listZoneWorkrs(listWrks,'personnel');
 
@@ -260,7 +217,6 @@ spaces.forEach(space=>{
                     case 'serveurs':
                          workersZone=listWrks.filter(elm=>elm.role=='it'||elm.role=='Nettoyage');
                          listZoneWorkrs(workersZone,'serveurs');
-
 
                       break ;
 
@@ -286,24 +242,85 @@ spaces.forEach(space=>{
                     default :
                         return ;
                     }
-
-              
          })
 })
-
 
 document.querySelector('#rmListZone').addEventListener('click',()=>{
             listZone.classList.remove('flex');
             listZone.classList.add('hidden');
 })
 
+//list zone workeer -----------------------------------------
+function listZoneWorkrs(listWorkr,zone){
 
+      if(Array.from(zone_wrks.children).length>0){
+                   Array.from(zone_wrks.children).forEach(elm=>elm.remove());
+               }
+
+     listWorkr.forEach(wrk=>{
+         const zone_wr =document.createElement('div');
+         
+         zone_wr.innerHTML=`<div  class="rounded-2xl p-1  pr-5 flex items-center bg-[#48474750] hover:shadow-[0px_0px_10px_#73737350] gap-4 hover:scale-105 transition duration-300 cursor-pointer" title="${wrk.role}">
+               <img src="${wrk.img}" class="h-9 rounded-full" alt="">
+               <p class="text-white font-thin tracking-[1px]">${wrk.nom}</p>
+         
+          </div>` ;
+          zone_wrks.append(zone_wr);
+         
+           
+           zone_wr.addEventListener('click',()=>{
+               switch(zone){
+                    case 'personnel':
+                        zonelises={...zonelises,personnel:[...zonelises.personnel,{ id:wrk.id,img:wrk.img,nom:wrk.nom,location:wrk.location,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.experiences}]};
+                      break ;
+                    
+                    case 'serveurs':
+                         zonelises={...zonelises,serveurs:[...zonelises.serveurs,{ id:wrk.id,img:wrk.img,nom:wrk.nom,location:wrk.location,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.experiences}]};
+                         
+                       break ;
+
+                    case 'securite':
+                         zonelises={...zonelises,securite:[...zonelises.securite,{ id:wrk.id,img:wrk.img,nom:wrk.nom,location:wrk.location,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.experiences}]};
+                        
+                        break ;
+
+                    case 'conference':
+                         zonelises={...zonelises,conference:[...zonelises.conference,{ id:wrk.id,img:wrk.img,nom:wrk.nom,location:wrk.location,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.experiences}]};
+                       break ;
+
+                    case 'archives':
+                         zonelises={...zonelises,archives:[...zonelises.archives,{ id:wrk.id,img:wrk.img,nom:wrk.nom,location:wrk.location,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.experiences}]};
+                         
+                       break ;
+                         
+                    case 'reception':
+                         if(zonelises.reception.length>=3){
+                               alert('reception zone Plein');
+                               return;
+                         }
+                         zonelises={...zonelises,reception:[...zonelises.reception,{ id:wrk.id,img:wrk.img,nom:wrk.nom,location:wrk.location,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};
+                        
+                      break ;
+   
+                    default :
+                        return ;
+            }
+                localStorage.setItem('zonelises',JSON.stringify(zonelises));
+               listWrks=listWrks.filter(worker=>worker.id!=wrk.id);
+               localStorage.setItem('listWrks',JSON.stringify(listWrks));
+               window.location.reload();
+                 
+           })
+     })
+ }
+
+//place workers to zone work------------------------------------
 function changeElementsZone(zone) {
     const elmZone = document.querySelectorAll(`[data-space="${zone}"]`);
 
     const workers = zonelises[zone];
 
-    if(workers<=0 && zone!='personnel'&&zone!='conference'){
+    if(workers.length<=0 && zone!='personnel'&&zone!='conference'){
         document.querySelector(`#${zone}`).classList.add('bg-[#c5303036]');
         return;
     }
@@ -315,20 +332,39 @@ function changeElementsZone(zone) {
      for (let i = 0; i < workers.length; i++) {
         const elmn = document.createElement('div');
         elmn.innerHTML = `
-            <div class="hover:scale-105 cursor-pointer w-[30px] overflow-hidden hover:w-[200px] transition duration-300">
-                <img src="./images/pin.png" class="h-[20px] relative top-5 left-[-2px]" alt="">
-                <div class="p-1 pr-3 flex items-center justify-between hover:bg-[#000000d4] hover:shadow-[0px_0px_10px_#73737350] w-[150px] rounded hover:rounded-2xl">
-                    <img src="./${workers[i].img}" class="h-7" alt="">
-                    <p class="text-white font-thin tracking-[1px]">${workers[i].nom}</p>
-                    <button class="text-white font-[200] text-lg mt-[-4px] self-start hover:text-red-500">x</button>
+            <div data-zone="${zone}" data-check='${workers[i].id}' class="dtails hover:scale-105 cursor-pointer w-[48px] overflow-hidden lg:hover:w-[150px] transition duration-300">
+                <img src="./images/pin.png" class="h-[20px] relative top-5 left-[0px] rounded-full p-0 " alt="">
+                <div class="p-1 pr-3 flex items-center justify-between lg:hover:bg-[#000000d4] hover:shadow-[0px_0px_10px_#73737350] w-[150px] rounded hover:rounded-2xl "  >
+                    <img src="./${workers[i].img}" class="h-10 rounded-full shadow-[0px_0px_7px_black]" alt="">
+                    <p class="text-white pl-3 hid min-h-11 font-thin tracking-[1px]">${workers[i].nom}</p>
+                    <button data-zonx="${zone}" class="RmFZone text-white font-[200] text-lg mt-[-4px] self-start hover:text-red-500 relative ">x</button>
                 </div>
             </div>
         `;
      elmZone[i].replaceWith(elmn);
+
+     const RmFZone=document.querySelectorAll('.RmFZone');
     
-}
+     RmFZone.forEach(elm=>{
+           elm.addEventListener('click',()=>{
+              
+              if(zone==elm.dataset.zonx){
+                    
+                    listWrks=[...listWrks,zonelises[zone].find(e=>e.id==workers[i].id)];
+                    localStorage.setItem('listWrks',JSON.stringify(listWrks));
+                    zonelises[zone]=zonelises[zone].filter(e=>e.id!=workers[i].id);
+                    
+                     localStorage.setItem('zonelises',JSON.stringify(zonelises))
+                     zone='';
+                     window.location.reload();
+              }
+
+           })
+     })
+      
 }
 
+}
 
 changeElementsZone('securite');
 changeElementsZone('serveurs');
@@ -338,4 +374,118 @@ changeElementsZone('reception');
 changeElementsZone('archives');
 
 
+//dtails part--------------------------------------------------
+
+    const dtails=document.querySelectorAll('.dtails');
+       function getDatals(zone,idWorker){
+          let Worker ;
+            switch(zone){
+              case 'personnel':
+                  Worker=zonelises['personnel'].find(worker=>worker.id==idWorker);
+               break ;
+
+              case 'serveurs':
+                   Worker=zonelises['serveurs'].find(worker=>worker.id==idWorker);
+               break ;
+
+              case 'securite':
+                    Worker=zonelises['securite'].find(worker=>worker.id==idWorker);
+               break ;
+
+              case 'conference':
+                    Worker=zonelises['conference'].find(worker=>worker.id==idWorker);
+               break ;
+
+              case 'archives':
+                    Worker=zonelises['archives'].find(worker=>worker.id==idWorker);
+               break ;
+              case 'reception':
+                   Worker=zonelises['reception'].find(worker=>worker.id==idWorker);
+                break ;
+   
+                default :
+                    Worker=listWrks.find(worker=>worker.id==idWorker);
+            }
+  console.log(listWrks);
+  workerDetails.classList.add('flex');
+  workerDetails.classList.remove('hidden');
+  if(workerDetails.firstElementChild){
+      workerDetails.firstElementChild.remove();
+  }
+                                     
+  const newDatails=document.createElement('div');
+  newDatails.innerHTML=`
+       <div class="bg-black text-white min-w-[350px] max-w-[100%] md:w-[550px] rounded-xl shadow-xl p-6 relative">
+
+                 <button id='closeDetailsBtn' class="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-2xl">
+                                    x
+                  </button>
+                                          
+                  <div class="flex justify-center mb-4">
+                      <img  src="./${Worker.img}" class="w-32 h-32 rounded-full object-cover border-4 border-gray-500 shadow-md" alt="Employee Photo">
+                  </div>
+                                          
+                  <h2  class="text-2xl font-bold text-center mb-1">${Worker.nom}</h2>
+                  <p  class="text-center text-blue-600 font-medium mb-4">
+                     ${Worker.role}
+                  </p>
+                                          
+                  <div class="space-y-2 mb-6">
+                    <p class="flex items-center gap-2">
+                      <span class="font-bold text-gray-600">Email:</span>
+                      <span id="detailsEmail" class="text-gray-300">${Worker.email}</span>
+                    </p>
+                                          
+                  <p class="flex items-center gap-2">
+                    <span class="font-bold text-gray-600">Phone:</span>
+                    <span id="detailsPhone" class="text-gray-300">${Worker.phone}</span>
+                  </p>
+                                          
+                  <p class="flex items-center gap-2">
+                    <span class="font-bold text-gray-600">Location:</span>
+                    <span id="detailsLocation" class="text-gray-300">${Worker.location}</span>
+                  </p>
+                </div>
+                                          
+                <h3 class="text-xl text-center font-semibold text-gray-300 mb-2">Work Experiences</h3>
+                <div  class="space-y-3 max-h-40 overflow-y-auto pr-2">
+                ${Worker.experiences.length>0?Worker.experiences.map(exp=>`
+                 <div class="bg-gray-100 p-3 rounded-lg shadow-sm border ">
+                     <p class="font-bold text-lg text-gray-900">${exp.exp_title}</p>
+                     
+                     <p class="text-sm text-gray-600 mt-1">${exp.exp_start} | ${exp.exp_end}</p>
+                     <p class="text-sm text-gray-600">${exp.description}</p>
+                 </div>
+             `):`<p>no experiences !?</p>`}
+        </div>
+  </div> `
+       workerDetails.appendChild(newDatails);
+
+   const btnRmDtails=document.querySelector('#closeDetailsBtn');
+   btnRmDtails.addEventListener('click',()=>{
+             workerDetails.classList.add('hidden');
+             workerDetails.classList.remove('flex');
+   })
+                }
+
+  dtails.forEach(elm=>{
+            elm.addEventListener('click',()=>{
+            getDatals(elm.dataset.zone,elm.dataset.check);
+                  })
+     })
+
+
+//rspon--------------
+const div_aside =document.querySelector('.div_aside');
+const rm_mobil_list=document.querySelector('.rm_mobil_list');
+rm_mobil_list.addEventListener('click',()=>{
+       div_aside.classList.add('hidden')
+       div_aside.classList.remove('flex')
+})
+
+const show_mobil_list =document.querySelector('.show_mobil_list');
+show_mobil_list.addEventListener('click',()=>{
+      div_aside.classList.add('flex')
+       div_aside.classList.remove('hidden')
+})
 
