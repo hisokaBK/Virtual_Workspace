@@ -49,7 +49,7 @@ addExperienceBtn.addEventListener('click',()=>{
                          </div>
                           <div>
                               <label for="exp-end">end : </label>
-                              <input type="date" required class="exp_end text-black rounded px-2" >
+                              <input type="date" onchange='check(this)' required class="exp_end text-black rounded px-2" >
                           </div>
                        </div>
                     </div>
@@ -108,7 +108,7 @@ document.querySelector('#employeeForm').addEventListener('submit',(e)=>{
               const exp_start=document.querySelectorAll('.exp_start');
               const exp_end=document.querySelectorAll('.exp_end');
               const description=document.querySelectorAll('.description');
-              
+
               if(nomberExp!=0){
                    for(let i=0;i<nomberExp;i++){
                    expworkers=[...expworkers,{exp_title:title[i].value,exp_start:exp_start[i].value,exp_end:exp_end[i].value,description:description[i].value}];
@@ -125,18 +125,22 @@ document.querySelector('#employeeForm').addEventListener('submit',(e)=>{
             
             valeusForm.location=document.querySelector('#location').value.trim();
              if (valeusForm.location.length < 3) {
-                 alert("La localisation doit contenir au moins 3 lettres");
+                 document.querySelector('#text_pop').textContent="La localisation doit contenir au moins 3 lettres";
+                  showPop()
                  return;
              }
 
             valeusForm.nom=document.querySelector('#name').value.trim();
              if (valeusForm.nom.length < 3) {
-                alert("Le nom doit contenir au moins 3 caractères");
+                
+                document.querySelector('#text_pop').textContent="Le nom doit contenir au moins 3 caractères";
+                showPop()
                 return;
             } 
             let checkNameExst=listWrks.find((elm)=>elm.nom==valeusForm.nom)
             if(checkNameExst){
-                    alert ('worker already exists');
+                    document.querySelector('#text_pop').textContent="worker already exists";
+                    showPop()
                     return ;
             }
 
@@ -144,14 +148,16 @@ document.querySelector('#employeeForm').addEventListener('submit',(e)=>{
             valeusForm.email=document.querySelector('#email').value.trim();
             let emailRegex = /^[a-zA-Z0-9._%+-]{3,}@[a-zA-Z0-9.-]{2,}\.[a-zA-Z]{2,}$/;
             if (!emailRegex.test(valeusForm.email)) {
-                alert("Email invalide (ex: name@gmail.com)");
+                document.querySelector('#text_pop').textContent="Email invalide (ex: name@gmail.com)";
+                showPop()
                 return;
             }
 
             valeusForm.phone=document.querySelector('#phone').value.trim();
-            let phoneRegex = /^06\d{8}$/;
+            let phoneRegex = /^0[5-7]\d{8}$/;
             if (!phoneRegex.test(valeusForm.phone)) {
-                alert("Numéro de téléphone invalide. Il doit commencer par 06 et contenir 10 chiffres.");
+                document.querySelector('#text_pop').textContent="Numéro de téléphone invalide. Il doit commencer par 06/07/05 et contenir 10 chiffres.";
+                       showPop()
                 return;
             }
 
@@ -294,10 +300,7 @@ function listZoneWorkrs(listWorkr,zone){
                        break ;
                          
                     case 'reception':
-                         if(zonelises.reception.length>=3){
-                               alert('reception zone Plein');
-                               return;
-                         }
+                         
                          zonelises={...zonelises,reception:[...zonelises.reception,{ id:wrk.id,img:wrk.img,nom:wrk.nom,location:wrk.location,role:wrk.role,email:wrk.email,phone:wrk.phone,experiences:wrk.expworkers}]};
                         
                       break ;
@@ -332,10 +335,10 @@ function changeElementsZone(zone) {
      for (let i = 0; i < workers.length; i++) {
         const elmn = document.createElement('div');
         elmn.innerHTML = `
-            <div data-zone="${zone}" data-check='${workers[i].id}' class="dtails hover:scale-105 cursor-pointer w-[48px] overflow-hidden lg:hover:w-[150px] transition duration-300">
+            <div data-zone="${zone}" data-check='${workers[i].id}' class="dtails hover:scale-105 cursor-pointer w-[48px] overflow-hidden md:hover:w-[150px] transition duration-300">
                 <img src="./images/pin.png" class="h-[20px] relative top-5 left-[0px] rounded-full p-0 " alt="">
-                <div class="p-1 pr-3 flex items-center justify-between lg:hover:bg-[#000000d4] hover:shadow-[0px_0px_10px_#73737350] w-[150px] rounded hover:rounded-2xl "  >
-                    <img src="./${workers[i].img}" class="h-10 rounded-full shadow-[0px_0px_7px_black]" alt="">
+                <div class="p-1 pr-3 flex items-center justify-between md:hover:bg-[#000000d4] hover:shadow-[0px_0px_10px_#73737350] w-[150px] rounded hover:rounded-2xl "  >
+                    <img src="./${workers[i].img}" class="h-9 rounded-full shadow-[0px_0px_7px_black]" alt="">
                     <p class="text-white pl-3 hid min-h-11 font-thin tracking-[1px]">${workers[i].nom}</p>
                     <button data-zonx="${zone}" class="RmFZone text-white font-[200] text-lg mt-[-4px] self-start hover:text-red-500 relative ">x</button>
                 </div>
@@ -406,7 +409,7 @@ changeElementsZone('archives');
                 default :
                     Worker=listWrks.find(worker=>worker.id==idWorker);
             }
-  console.log(listWrks);
+  console.log(Worker);
   workerDetails.classList.add('flex');
   workerDetails.classList.remove('hidden');
   if(workerDetails.firstElementChild){
@@ -449,14 +452,14 @@ changeElementsZone('archives');
                                           
                 <h3 class="text-xl text-center font-semibold text-gray-300 mb-2">Work Experiences</h3>
                 <div  class="space-y-3 max-h-40 overflow-y-auto pr-2">
-                ${Worker.experiences.length>0?Worker.experiences.map(exp=>`
+                ${Worker.experiences?Worker.experiences.length>0?Worker.experiences.map(exp=>`
                  <div class="bg-gray-100 p-3 rounded-lg shadow-sm border ">
                      <p class="font-bold text-lg text-gray-900">${exp.exp_title}</p>
                      
                      <p class="text-sm text-gray-600 mt-1">${exp.exp_start} | ${exp.exp_end}</p>
                      <p class="text-sm text-gray-600">${exp.description}</p>
                  </div>
-             `):`<p>no experiences !?</p>`}
+             `):`<p>no experiences !?</p>`:'<p>no experiences !?</p>'}
         </div>
   </div> `
        workerDetails.appendChild(newDatails);
@@ -475,7 +478,8 @@ changeElementsZone('archives');
      })
 
 
-//rspon--------------
+//rspon mbl--------------
+
 const div_aside =document.querySelector('.div_aside');
 const rm_mobil_list=document.querySelector('.rm_mobil_list');
 rm_mobil_list.addEventListener('click',()=>{
@@ -487,5 +491,37 @@ const show_mobil_list =document.querySelector('.show_mobil_list');
 show_mobil_list.addEventListener('click',()=>{
       div_aside.classList.add('flex')
        div_aside.classList.remove('hidden')
+
 })
 
+
+//chech date ----------------------------------------
+function check(e){
+             const date_start =new Date(e.parentElement.previousElementSibling.lastElementChild.value);
+             const date_end =new Date(e.value)
+             if(date_end - date_start < 0){
+                       e.value='';
+                       e.classList.add('text-red-700');
+                       e.parentElement.previousElementSibling.lastElementChild.classList.add('text-red-700');
+
+                       document.querySelector('#text_pop').textContent="date experience , check it";
+                       showPop()
+             }else{
+                       e.classList.remove('text-red-700');
+                       e.parentElement.previousElementSibling.lastElementChild.classList.remove('text-red-700');
+             }
+    }
+
+//erooors popap----------------
+
+function showPop(){
+         document.querySelector('#pop').classList.remove('hidden');
+         document.querySelector('#pop').classList.remove('translate-x-96');
+         
+        
+
+}
+
+document.querySelector('#remPop').addEventListener('click',()=>{
+         document.querySelector('#pop').classList.add('hidden');
+})
