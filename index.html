@@ -11,12 +11,13 @@
 </head>
 <body class="bg-black">
 
-    <main class="p-4 bg-[#121212] min-h-screen ">
-             <h1 class="text-gray-400 text-[25px]  font-serif font-bold text-center p-6 pl-72 ">Work-Sphere</h1>
-        <section class="grid grid-cols-4 gap-12">
+    <main class="p-4 bg-[#121212] min-h-screen flex flex-col justify-around">
+             <h1 class="text-gray-400 sm:text-[20px] lg:text-[25px]  font-serif font-bold text-center p-3 lg:pl-72 ">Work-Sphere</h1>
 
-        <!-- ----------------------side bar------------------------------ -->
-            <aside class="bg-[#00000042] h-[500px] border-4 border-gray-400 col-span-1 rounded-3xl font-[500] p-4 pb-0 text-center flex flex-col justify-center min-w-[250px]" >
+        <section class="flex gap-8 flex-col-reverse lg:flex-row">
+   <!-- ----------------------side bar------------------------------ -->
+            <div class="div_aside w-screen h-screen flex-col gap-3 justify-center items-center hidden absolute top-0 z-50  lg:relative bg-[#827878ee] lg:bg-[#332e2e00] lg:w-auto lg:h-auto lg:flex ">
+               <aside class="bg-[#000000] h-[500px] border-4 border-gray-400 col-span-3 rounded-3xl font-[500] p-4 pb-0 text-center flex flex-col justify-center w-[300px] ">
                  <h2 class="text-gray-400 font-serif">Workers</h2>
                  <hr class="border-[1] border-gray-500 my-4">
 
@@ -29,10 +30,14 @@
                       <button id="btnAddWrk" class="text-gray-400 font-[200] self-start  border border-gray-400 py-1  rounded-full px-3 hover:text-green-600 hover:border-green-900">Add New Worker</button>
                  </div>
             </aside>
+          <div class="rm_mobil_list text-black border border-black p-2 px-4 cursor-pointer hover:border-red-900 hover:text-red-800 rounded-full lg:hidden">
+               <span>X</span>
+          </div>
+         </div>
 
-        <!-- ---------------------work-space----------------------------- -->
+    <!-- ---------------------work-space----------------------------- -->
         
-            <div class="work_space col-span-3 border-4 relative ">
+            <div class="work_space col-span-3 border-4 relative lg:w-[80%] h-[500px] ">
 
 
                   <div title="reception" id="reception" class="reception  flex flex-col justify-around z-20 bg-[#c5303036] ">
@@ -46,7 +51,6 @@
                        </div>
 
                    </div>
-
 
                    <div title="conference" id="conference" class="item2 flex flex-col justify-around z-20 ">
                            
@@ -120,28 +124,32 @@
             </div>
 
         </section>
-      
+       <div class="text-gray-600 text-center  lg:hidden">
+         <span class="show_mobil_list cursor-pointer hover:text-gray-300">list Workers</span>
+       </div>
     </main>
-
-
-<div id="addEmployeeModal" class="blok_form absolute top-0 hidden  text-white  flex-col justify-center bg-[#807f7f8a] items-center px-12 py-4 z-50">
    
-   <div class="bg-[#000000c8] form_content border-2 px-10 pt-2 pb-2 w-[80%] rounded-[80px] flex flex-col gap-6">
+
+    <!-- ---------------------add worker form----------------------------- -->
+
+<div id="addEmployeeModal" class="blok_form absolute top-0 hidden text-white   justify-center bg-[#807f7f8a] items-center sm:px-12  sm:py-4 z-50 w-screen ">
+   
+   <div class="bg-[#000000c8] form_content lg:px-10 px-4 lg:pt-2 lg:pb-2 w-screen sm:w-[80%] rounded-2xl lg:rounded-[80px] flex flex-col lg:gap-6">
        <div class="text-end px-4 ">
-           <span class="close-btn text-gray-300 font-[200] text-[34px] self-start hover:text-white cursor-pointer  px-3  " id="close_form">x</span>
+           <span class="close-btn text-gray-400 font-[200] text-[34px] self-start hover:text-white cursor-pointer  lg:px-3  " id="close_form">x</span>
        </div>
     
-       <div class="flex justify-around ">
+       <div class="flex justify-around flex-col items-center lg:flex-row gap-4 ">
 
-        <div class="w-[47%] flex flex-col gap-9 ">
-           <h2 class="text-gray-400 font-serif text-2xl font-bold">Worker Formation</h2>
-           <p class="max-w-[90%] text-gray-400 text-lg">Hello, you can modify or add a worker. Please be careful when entering the data. Thank you </p>
-           <div>
+        <div class="flex flex-col  lg:gap-9 w-[100%] lg:w-[47%] ">
+           <h2 class="text-gray-200 font-serif lg:text-2xl md:text-xl font-bold text-center sm:p-3 lg:text-start">Worker Formation</h2>
+           <p class="lg:max-w-[90%] text-gray-400 lg:text-lg  lg:flex">Hello, you can not modify a worker. Please be careful when entering the data. Thank you </p>
+           <div class="hidden lg:flex">
               <img src="./images/addprsn.gif"  alt="">
            </div>
         </div>
     
-        <form id="employeeForm" class="border px-8 rounded-3xl pt-4 bg-black flex flex-col w-[50%]">
+        <form id="employeeForm" class="border shadow-[0px_0px_20px_#94909046] px-8 rounded-3xl pt-4 bg-black flex flex-col w-[90%] md:w-[90%] lg:w-[50%]">
          
           <div>
             <label class="block pt-4" for="photo">Photo URL </label>
@@ -150,7 +158,12 @@
     
           <div>
              <label class="block pt-4" for="name">Full Name *</label>
-             <input class="bg-[#38363610] hover:border-white focus:border-white border-gray-500 border-b outline-none rounded w-[80%] h-10 pl-4 ml-10" type="text" placeholder="worker name" id="name" required title="Enter employee name">
+             <input class="bg-[#38363610] hover:border-white focus:border-white border-gray-500 border-b outline-none rounded w-[80%] h-10 pl-4 ml-10" type="text" placeholder="worker name" id="name" required >
+          </div>
+
+          <div>
+             <label class="block pt-4" for="name">localisation actuelle</label>
+             <input class="bg-[#38363610] hover:border-white focus:border-white border-gray-500 border-b outline-none rounded w-[80%] h-10 pl-4 ml-10" type="text" placeholder="worker location" id="location" required >
           </div>
     
           <div class="text-black">
@@ -167,12 +180,12 @@
     
          <div>
              <label class="block pt-4" for="email">Email </label>
-             <input class="bg-[#38363610] hover:border-white focus:border-white border-gray-500 border-b outline-none rounded w-[80%] h-10 pl-4 ml-10" type="email" id="email"  placeholder="name@email.com">
+             <input class="bg-[#38363610] hover:border-white focus:border-white border-gray-500 border-b outline-none rounded w-[80%] h-10 pl-4 ml-10" required type="email" id="email"  placeholder="name@email.com">
          </div> 
     
          <div>
             <label class="block pt-4" for="phone">Phone </label>
-            <input class="bg-[#38363610] hover:border-white focus:border-white border-gray-500 border-b outline-none rounded w-[80%] h-10 pl-4 ml-10" type="tel" id="phone" placeholder="+212 6 12345678" >
+            <input class="bg-[#38363610] hover:border-white focus:border-white border-gray-500 border-b outline-none rounded w-[80%] h-10 pl-4 ml-10" required type="tel" id="phone" placeholder="+212 6 12345678" >
          </div>
     
          <div id="experienceContainer" class="border p-3 flex flex-col gap-4 mt-6">
@@ -199,8 +212,9 @@
   </div>
 </div>
 
+    <!-- ---------------------list zone worker----------------------------- -->
 
-<div id="listZone" class="hidden blok_form absolute top-0   text-white  justify-center bg-[#827878ee] items-center px-12 py-4 z-50 w-screen h-screen  ">
+<div id="listZone" class="hidden blok_form absolute top-0 text-white  justify-center bg-[#827878ee] items-center px-12 py-4 z-50 w-screen h-screen">
      <div class="bg-[#000000] h-[500px] border-4 border-gray-400 col-span-1 rounded-3xl font-[500]  text-center flex flex-col justify-center min-w-[300px] p-4" >
                  <h2 class="text-gray-400 font-serif">Workers</h2>
                  <hr class="border-[1] border-gray-500 my-4">
@@ -217,6 +231,14 @@
        
 </div>
 
+    <!-- ---------------------dtails worker----------------------------- -->
+
+<div id="workerDetails" class="hidden absolute top-0 w-screen h-full bg-[#827878ee]  justify-center items-center z-50">
+  
+  
+</div>
+
+ 
 
 </body>
 </html>
