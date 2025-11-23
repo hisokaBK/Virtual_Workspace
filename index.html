@@ -11,7 +11,7 @@
 </head>
 <body class="bg-black">
 
-    <main class="p-4 bg-[#121212] min-h-screen flex flex-col justify-around">
+    <main class="p-4 bg-[#121212] min-h-screen flex flex-col ">
              <h1 class="text-gray-400 sm:text-[20px] lg:text-[25px]  font-serif font-bold text-center p-3 lg:pl-72 ">Work-Sphere</h1>
 
         <section class="flex gap-8 flex-col-reverse lg:flex-row">
@@ -124,7 +124,7 @@
             </div>
 
         </section>
-       <div class="text-gray-600 text-center  lg:hidden">
+       <div class="text-gray-600 text-center  lg:hidden pt-6">
          <span class="show_mobil_list cursor-pointer hover:text-gray-300">list Workers</span>
        </div>
     </main>
@@ -132,17 +132,17 @@
 
     <!-- ---------------------add worker form----------------------------- -->
 
-<div id="addEmployeeModal" class="blok_form absolute top-0 hidden text-white   justify-center bg-[#807f7f8a] items-center sm:px-12  sm:py-4 z-50 w-screen ">
+<div id="addEmployeeModal" class="blok_form absolute top-0 hidden text-white   justify-center bg-[#807f7f8a] items-center sm:px-12 sm:py-4 z-50 w-[100%] ">
    
    <div class="bg-[#000000c8] form_content lg:px-10 px-4 lg:pt-2 lg:pb-2 w-screen sm:w-[80%] rounded-2xl lg:rounded-[80px] flex flex-col lg:gap-6">
        <div class="text-end px-4 ">
            <span class="close-btn text-gray-400 font-[200] text-[34px] self-start hover:text-white cursor-pointer  lg:px-3  " id="close_form">x</span>
        </div>
     
-       <div class="flex justify-around flex-col items-center lg:flex-row gap-4 ">
+       <div class="flex justify-around flex-col items-center lg:flex-row gap-4 lg:justify-start ">
 
-        <div class="flex flex-col  lg:gap-9 w-[100%] lg:w-[47%] ">
-           <h2 class="text-gray-200 font-serif lg:text-2xl md:text-xl font-bold text-center sm:p-3 lg:text-start">Worker Formation</h2>
+        <div class="flex flex-col  lg:gap-8 w-[100%] lg:w-[50%] lg:self-start ">
+           <h2 class="text-gray-200 font-serif lg:text-2xl md:text-xl font-bold text-center sm:p-3 lg:text-start lg:self-start">Worker Formation</h2>
            <p class="lg:max-w-[90%] text-gray-400 lg:text-lg  lg:flex">Hello, you can not modify a worker. Please be careful when entering the data. Thank you </p>
            <div class="hidden lg:flex">
               <img src="./images/addprsn.gif"  alt="">
@@ -238,7 +238,12 @@
   
 </div>
 
- 
+<!-- ----------------error popap --------------------------------- -->
+     
+   <div id="pop" class="hidden transform translate-x-96  fixed p-1 px-2 bg-[#fffffff5] text-black border-2 border-black  min-w-[240px] min-h-[80px] rounded-xl right-10 bottom-5 z-50 ">
+           <div class="text-end "><span id="remPop" class="cursor-pointer hover:text-red-600">x</span></div>
+           <p id="text_pop" class="text-center font-serif">bilal m9awad</p>
+   </div>
 
 </body>
 </html>
