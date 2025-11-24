@@ -453,7 +453,7 @@ changeElementsZone('archives');
                 <h3 class="text-xl text-center font-semibold text-gray-300 mb-2">Work Experiences</h3>
                 <div  class="space-y-3 max-h-40 overflow-y-auto pr-2">
                 ${Worker.experiences?Worker.experiences.length>0?Worker.experiences.map(exp=>`
-                 <div class="bg-gray-100 p-3 rounded-lg shadow-sm border ">
+                 <div class="bg-[#ffffffb9] p-3 rounded-lg shadow-sm border ">
                      <p class="font-bold text-lg text-gray-900">${exp.exp_title}</p>
                      
                      <p class="text-sm text-gray-600 mt-1">${exp.exp_start} | ${exp.exp_end}</p>
@@ -514,14 +514,27 @@ function check(e){
 
 //erooors popap----------------
 
+let pop = document.querySelector('#pop');
+pop.style.transform = `translateX(106px)`;
+
 function showPop(){
-         document.querySelector('#pop').classList.remove('hidden');
-         document.querySelector('#pop').classList.remove('translate-x-96');
-         
-        
+
+         pop.classList.remove('hidden');;
+          let x = 106;
+          
+          time=setInterval(() => {
+            x -= 2;
+            pop.style.transform = `translateX(${x}px)`;
+            if(x<0){
+                clearInterval(time)
+            }
+          }, 10);
+          
 
 }
 
 document.querySelector('#remPop').addEventListener('click',()=>{
          document.querySelector('#pop').classList.add('hidden');
+         pop.style.transform = `translateX(106px)`;
+
 })
