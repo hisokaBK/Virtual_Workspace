@@ -514,14 +514,27 @@ function check(e){
 
 //erooors popap----------------
 
+let pop = document.querySelector('#pop');
+pop.style.transform = `translateX(106px)`;
+
 function showPop(){
-         document.querySelector('#pop').classList.remove('hidden');
-         document.querySelector('#pop').classList.remove('translate-x-96');
-         
-        
+
+         pop.classList.remove('hidden');;
+          let x = 106;
+          
+          time=setInterval(() => {
+            x -= 2;
+            pop.style.transform = `translateX(${x}px)`;
+            if(x<0){
+                clearInterval(time)
+            }
+          }, 10);
+          
 
 }
 
 document.querySelector('#remPop').addEventListener('click',()=>{
          document.querySelector('#pop').classList.add('hidden');
+         pop.style.transform = `translateX(106px)`;
+
 })

@@ -655,8 +655,8 @@ video {
   inset: -0.25rem;
 }
 
-.bottom-5 {
-  bottom: 1.25rem;
+.bottom-7 {
+  bottom: 1.75rem;
 }
 
 .end-1 {
@@ -1086,11 +1086,6 @@ video {
 
 .border-separate {
   border-collapse: separate;
-}
-
-.translate-x-96 {
-  --tw-translate-x: 24rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .\!transform {
@@ -2133,8 +2128,8 @@ video {
   background-color: #c5303036;
 }
 
-.bg-\[\#d7d6d678\] {
-  background-color: #d7d6d678;
+.bg-\[\#ffffffb9\] {
+  background-color: #ffffffb9;
 }
 
 .bg-\[\#fffffff5\] {
@@ -2154,14 +2149,6 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-}
-
-.bg-\[\#d7d6d6b9\] {
-  background-color: #d7d6d6b9;
-}
-
-.bg-\[\#ffffffb9\] {
-  background-color: #ffffffb9;
 }
 
 .decoration-slice {
