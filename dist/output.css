@@ -928,6 +928,10 @@ video {
   height: 2.25rem;
 }
 
+.h-\[100vh\] {
+  height: 100vh;
+}
+
 .h-\[20px\] {
   height: 20px;
 }
@@ -1030,6 +1034,22 @@ video {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-\[\] {
+  width: ;
+}
+
+.w-\[8\] {
+  width: 8;
+}
+
+.w-\[94\] {
+  width: 94;
+}
+
+.w-\[94\%\] {
+  width: 94%;
 }
 
 .min-w-\[240px\] {
@@ -3279,6 +3299,10 @@ video {
 
   .lg\:bg-\[\#332e2e00\] {
     background-color: #332e2e00;
+  }
+
+  .lg\:p-4 {
+    padding: 1rem;
   }
 
   .lg\:px-10 {
